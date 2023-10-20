@@ -1,18 +1,28 @@
-const endpointsklep = "http://192.168.15.10/wordpresskk"
-const endpointhurtownia = "http://192.168.15.7/kgwordpress"
-
-const idproduktusklep = 93
-const idproduktuhurtownia = 35
-
 async function getProd(){
 
-     const data = await fetch(endpointsklep + "/wp-json/wc/v3/products/93", {
-        headers: {
-            authorization: `Basic ${btoa("kamil:kamil")}`
-        }
-     })
-     const json = await data.json()
-     console.log(json)
+    const data = await fetch("https://api.github.com/user/repos", {
+       headers: {
+           authorization: `Token ${"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"}`
+       }
+    })
+    const json = await data.json()
+    const list = document.createElement("ul")
+    for(let i in json){
 
+       
+        const body = document.querySelector("body")
+       
+        const frag = document.createElement("li")
+        frag.setAttribute("id", `${i}`)
+      
+        frag.innerHTML =  json[i].full_name + "   ID: " + json[i].id
+        frag.setAttribute("onhover", json[i].id)
+        body.appendChild(list)
+        list.appendChild(frag)
+
+    }
 }
 getProd()
+
+
+
